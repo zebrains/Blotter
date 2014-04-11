@@ -1195,8 +1195,11 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBloc
                 bnNew /= PastRateTargetSeconds;
         }
             
-    if (bnNew > pindexLast->nBits * 4) { bnNew = pindexLast->nBits * 4; } // limit maximal downward diff adjustment to x4
-    if (bnNew < pindexLast->nBits / 4) { bnNew = pindexLast->nBits / 4; } // limit maximal upward diff adjustment to /4
+    CBigNum bnLast;
+    bnLast.SetCompact(pindexLast->nBits);
+        
+    if (bnNew > bnLast * 4) { bnNew = bnLast * 4; } // limit maximal downward diff adjustment to x4
+    if (bnNew < bnLast / 4) { bnNew = bnLast / 4; } // limit maximal upward diff adjustment to /4
     
     if (bnNew > bnProofOfWorkLimit) { bnNew = bnProofOfWorkLimit; }
     
