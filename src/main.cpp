@@ -1122,8 +1122,8 @@ static const int64 nInterval = nTargetTimespan / nTargetSpacing; // retargets ev
 unsigned int ComputeMinWork(unsigned int nBase, int64 nTime)
 {
     // Testnet has min-difficulty blocks
-    // after nTargetSpacing*2 time between blocks:
-    if (fTestNet && nTime > nTargetSpacing*2)
+    // after nTargetSpacing*16 time between blocks:
+    if (fTestNet && nTime > nTargetSpacing*16)
         return bnProofOfWorkLimit.GetCompact();
 
     CBigNum bnResult;
