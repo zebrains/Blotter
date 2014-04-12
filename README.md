@@ -4,10 +4,23 @@ Monocle integration/staging tree
 http://www.monocle.org
 
 Copyright (c) 2009-2013 Bitcoin Developers
-Copyright (c) 2014- Monocle Developers
+Copyright (c) 2014 Monocle Developers
 
 What is Monocle?
 ----------------
+
+Monocle is a merge mineable N-factor Scrypt coin, released by the Vertcoin developers
+ 
+ - 2 minute block targets
+ - subsidy decreases constantly
+ - 1 MON per block
+ - ~84 million total coins
+
+The rest is the same as Bitcoin.
+ - 50 coins per block
+ - 2016 blocks to retarget difficulty
+
+=======
 
 Monocle is a merged-mined auxilliary with Vertcoin as it's parent chain, like 
 it's parent it uses scrypt with an adaptive number of iterations and memory usage
