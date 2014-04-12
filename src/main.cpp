@@ -39,7 +39,7 @@ int nBestHeight = -1;
 uint256 nBestChainWork = 0;
 uint256 nBestInvalidWork = 0;
 uint256 hashBestChain = 0;
-uint32_t nChainStartTime = 1397252438;
+uint32_t nVertcoinChainStartTime = 1389306217;
 CBlockIndex* pindexBest = NULL;
 set<CBlockIndex*, CBlockIndexWorkComparator> setBlockIndexValid; // may contain all CBlockIndex*'s that have validness >=BLOCK_VALID_TRANSACTIONS, and must contain those who aren't failed
 int64 nTimeBestReceived = 0;
@@ -1078,10 +1078,10 @@ const unsigned char maxNfactor = 30;
 unsigned char GetNfactor(int64 nTimestamp) {
     int l = 0;
 
-    if (nTimestamp <= nChainStartTime)
+    if (nTimestamp <= nVertcoinChainStartTime)
         return minNfactor;
 
-    int64 s = nTimestamp - nChainStartTime;
+    int64 s = nTimestamp - nVertcoinChainStartTime;
     while ((s >> 1) > 3) {
       l += 1;
       s >>= 1;
