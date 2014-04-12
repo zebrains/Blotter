@@ -1,7 +1,7 @@
 src/*.exe
-src/unitedscryptcoin
-src/unitedscryptcoind
-src/test_unitedscryptcoin
+src/monocle
+src/monocled
+src/test_monocle
 .*.swp
 *.*~*
 *.bak
@@ -9,17 +9,17 @@ src/test_unitedscryptcoin
 *.orig
 *.o
 *.patch
-.unitedscryptcoin
+.monocle
 
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-unitedscryptcoin-qt
-UnitedScryptCoin-Qt.app
+monocle-qt
+Monocle.app
 
 # Unit-tests
 Makefile.test
-unitedscrpyptcoin-qt_test
+monocle-qt_test
 
 # Resources cpp
 qrc_*.cpp
