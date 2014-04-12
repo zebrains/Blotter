@@ -20,6 +20,17 @@ The rest is the same as Bitcoin.
  - 50 coins per block
  - 2016 blocks to retarget difficulty
 
+=======
+
+Monocle is a merged-mined auxilliary with Vertcoin as it's parent chain, like 
+it's parent it uses scrypt with an adaptive number of iterations and memory usage
+as a proof-of-work algorithm.
+ - 2 minute block targets
+ - subsidy declines at ?? rate every coin fortnight
+ - ?? total coins
+ - ?? coins per block
+ - 12 block retarget using Kimoto's Gravity Well with a 180 block lookback
+
 For more information, as well as an immediately useable, binary version of
 the Monocle client sofware, see http://www.monocle.org.
 
@@ -40,7 +51,7 @@ development team members simply pulls it.
 
 If it is a *more complicated or potentially controversial* change, then the patch
 submitter will be asked to start a discussion (if they haven't already) on the
-[mailing list](http://sourceforge.net/mailarchive/forum.php?forum_name=bitcoin-development).
+[Monocle forum](http://forum.monocle.).
 
 The patch will be accepted if there is broad consensus that it is a good thing.
 Developers should expect to rework and resubmit patches if the code doesn't
@@ -48,16 +59,11 @@ match the project's coding conventions (see `doc/coding.txt`) or are
 controversial.
 
 The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/bitcoin/bitcoin/tags) are created
+completely stable. [Tags](https://github.com/erkmos/monocle/tags) are created
 regularly to indicate new official, stable release versions of Monocle.
 
 Testing
 -------
-
-Testing and code review is the bottleneck for development; we get more pull
-requests than we can review and test. Please be patient and help out, and
-remember this is a security-critical project where any mistake might cost people
-lots of money.
 
 ### Automated Testing
 
@@ -70,7 +76,7 @@ Unit tests for the core code are in `src/test/`. To compile and run them:
 
 Unit tests for the GUI code are in `src/qt/test/`. To compile and run them:
 
-    qmake BITCOIN_QT_TEST=1 -o Makefile.test bitcoin-qt.pro
+    qmake BITCOIN_QT_TEST=1 -o Makefile.test monocle.pro
     make -f Makefile.test
     ./monocle-qt_test
 
