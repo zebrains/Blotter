@@ -1122,8 +1122,8 @@ static const int64 nInterval = nTargetTimespan / nTargetSpacing; // retargets ev
 unsigned int ComputeMinWork(unsigned int nBase, int64 nTime)
 {
     // Testnet has min-difficulty blocks
-    // after nTargetSpacing*2 time between blocks:
-    if (fTestNet && nTime > nTargetSpacing*2)
+    // after nTargetSpacing*16 time between blocks:
+    if (fTestNet && nTime > nTargetSpacing*16)
         return bnProofOfWorkLimit.GetCompact();
 
     CBigNum bnResult;
@@ -1201,8 +1201,11 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, uint64 Targ
         bnNew /= PastRateTargetSeconds;
     }
             
-    if (bnNew > pindexLast->nBits * 4) { bnNew = pindexLast->nBits * 4; } // limit maximal downward diff adjustment to x4
-    if (bnNew < pindexLast->nBits / 4) { bnNew = pindexLast->nBits / 4; } // limit maximal upward diff adjustment to /4
+    CBigNum bnLast;
+    bnLast.SetCompact(pindexLast->nBits);
+        
+    if (bnNew > bnLast * 4) { bnNew = bnLast * 4; } // limit maximal downward diff adjustment to x4
+    if (bnNew < bnLast / 4) { bnNew = bnLast / 4; } // limit maximal upward diff adjustment to /4
     
     if (bnNew > bnProofOfWorkLimit) { bnNew = bnProofOfWorkLimit; }
     
