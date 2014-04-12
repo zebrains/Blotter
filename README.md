@@ -4,14 +4,16 @@ Monocle integration/staging tree
 http://www.monocle.org
 
 Copyright (c) 2009-2013 Bitcoin Developers
-Copyright (c) 2011-2013 Monocle Developers
+Copyright (c) 2014 Monocle Developers
 
 What is Monocle?
 ----------------
 
-Monocle is a lite version of Bitcoin using scrypt as a proof-of-work algorithm.
- - 2.5 minute block targets
- - subsidy halves in 840k blocks (~4 years)
+Monocle is a merge mineable N-factor Scrypt coin, released by the Vertcoin developers
+ 
+ - 2 minute block targets
+ - subsidy decreases constantly
+ - 1 MON per block
  - ~84 million total coins
 
 The rest is the same as Bitcoin.
