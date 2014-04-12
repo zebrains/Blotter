@@ -4,19 +4,19 @@ Monocle integration/staging tree
 http://www.monocle.org
 
 Copyright (c) 2009-2013 Bitcoin Developers
-Copyright (c) 2011-2013 Monocle Developers
+Copyright (c) 2014- Monocle Developers
 
 What is Monocle?
 ----------------
 
-Monocle is a lite version of Bitcoin using scrypt as a proof-of-work algorithm.
- - 2.5 minute block targets
- - subsidy halves in 840k blocks (~4 years)
- - ~84 million total coins
-
-The rest is the same as Bitcoin.
- - 50 coins per block
- - 2016 blocks to retarget difficulty
+Monocle is a merged-mined auxilliary with Vertcoin as it's parent chain, like 
+it's parent it uses scrypt with an adaptive number of iterations and memory usage
+as a proof-of-work algorithm.
+ - 2 minute block targets
+ - subsidy declines at ?? rate every coin fortnight
+ - ?? total coins
+ - ?? coins per block
+ - 12 block retarget using Kimoto's Gravity Well with a 180 block lookback
 
 For more information, as well as an immediately useable, binary version of
 the Monocle client sofware, see http://www.monocle.org.
@@ -46,16 +46,11 @@ match the project's coding conventions (see `doc/coding.txt`) or are
 controversial.
 
 The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/bitcoin/bitcoin/tags) are created
+completely stable. [Tags](https://github.com/erkmos/monocle/tags) are created
 regularly to indicate new official, stable release versions of Monocle.
 
 Testing
 -------
-
-Testing and code review is the bottleneck for development; we get more pull
-requests than we can review and test. Please be patient and help out, and
-remember this is a security-critical project where any mistake might cost people
-lots of money.
 
 ### Automated Testing
 
@@ -68,7 +63,7 @@ Unit tests for the core code are in `src/test/`. To compile and run them:
 
 Unit tests for the GUI code are in `src/qt/test/`. To compile and run them:
 
-    qmake BITCOIN_QT_TEST=1 -o Makefile.test bitcoin-qt.pro
+    qmake BITCOIN_QT_TEST=1 -o Makefile.test monocle.pro
     make -f Makefile.test
     ./monocle-qt_test
 
