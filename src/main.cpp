@@ -1106,11 +1106,8 @@ unsigned char GetNfactor(int64 nTimestamp) {
 
 int64 static GetBlockValue(int nHeight, int64 nFees)
 {
-    int64 nSubsidy = 50 * COIN;
-
-    // Subsidy is cut in half every 840000 blocks, which will occur approximately every 4 years
-    nSubsidy >>= (nHeight / 840000); // Monocle: 840k blocks in ~4 years
-
+    int64 nSubsidy = 25 * pow(double(0.97044562), nHeight/10800) * COIN;
+    
     return nSubsidy + nFees;
 }
 
