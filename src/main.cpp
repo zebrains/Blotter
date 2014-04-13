@@ -15,9 +15,11 @@
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
+#include "fixed.h"
 
 using namespace std;
 using namespace boost;
+using namespace numeric;
 
 //
 // Global state
@@ -1154,15 +1156,17 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, uint64 Targ
         const CBlockIndex *BlockLastSolved                                = pindexLast;
         const CBlockIndex *BlockReading                                = pindexLast;
 
+        typedef Fixed<16, 16> fixed;
+        
         uint64                                PastBlocksMass                                = 0;
         int64                                PastRateActualSeconds                = 0;
         int64                                PastRateTargetSeconds                = 0;
-        double                                PastRateAdjustmentRatio                = double(1);
+        fixed                                PastRateAdjustmentRatio                = 1;
         CBigNum                                PastDifficultyAverage;
         CBigNum                                PastDifficultyAveragePrev;
-        double                                EventHorizonDeviation;
-        double                                EventHorizonDeviationFast;
-        double                                EventHorizonDeviationSlow;
+        fixed                                EventHorizonDeviation;
+        fixed                                EventHorizonDeviationFast;
+        fixed                                EventHorizonDeviationSlow;
         
     if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || (uint64)BlockLastSolved->nHeight < PastBlocksMin) { return bnProofOfWorkLimit.GetCompact();
     }
@@ -1209,9 +1213,10 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, uint64 Targ
     
     if (bnNew > bnProofOfWorkLimit) { bnNew = bnProofOfWorkLimit; }
     
+      
     // debug print
-    printf("Difficulty Retarget - Kimono's Gravity Smell\n");
-    printf("PastRateAdjustmentRatio = %g\n", PastRateAdjustmentRatio);
+    printf("Difficulty Retarget - Kimoto's Gravity Hell\n");
+    printf("PastRateAdjustmentRatio = %g\n", Fixed::to_float(PastRateAdjustmentRatio));
     printf("Before: %08x %.8f\n", BlockLastSolved->nBits, getDifficulty(BlockLastSolved->nBits));
     printf("After: %08x %.8f\n", bnNew.GetCompact(), getDifficulty(bnNew.GetCompact()));
     
@@ -1227,7 +1232,7 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
         int64                                PastSecondsMax                                = TimeDaySeconds * 7;
         uint64                                PastBlocksMin                                = PastSecondsMin / BlocksTargetSpacing; // 180 blocks
         uint64                                PastBlocksMax                                = PastSecondsMax / BlocksTargetSpacing; // 5040 blocks       
-
+        
          if (fTestNet)
         {
             // If the new block's timestamp is more than nTargetSpacing*16
