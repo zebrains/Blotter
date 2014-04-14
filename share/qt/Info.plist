@@ -15,7 +15,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleExecutable</key>
-	<string>Monocle</string>
+	<string>Monocle-Qt</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.monocle.Monocle-Qt</string>
         <key>CFBundleURLTypes</key>
