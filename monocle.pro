@@ -1,7 +1,7 @@
 TEMPLATE = app
-TARGET = monocle
-macx:TARGET = "Monocle"
-VERSION = 0.8.6.2
+TARGET = monocle-qt
+macx:TARGET = "Monocle-Qt"
+VERSION = 0.8.6.1
 INCLUDEPATH += src src/json src/qt
 QT += core gui network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
