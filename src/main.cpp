@@ -1247,7 +1247,7 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
         }
     }
     // difficulty 1.0 until first BRNDF retarget
-    if (pindexLast->nHeight+1 < 192) {
+    if (pindexLast->nHeight+1 < 192 && !fTestNet) {
         return 0x1d00ffff;
     }
    	if ((pindexLast->nHeight+1) % nInterval != 0) 

@@ -12,10 +12,10 @@ What is Monocle?
 Monocle is a merge mineable N-factor Scrypt coin, released by the Vertcoin developers
 
  - 2 minute block targets
- - subsidy declines at ?? rate every coin fortnight
- - ?? total coins
- - ?? coins per block
- - 12 block retarget using Kimoto's Gravity Well with a 180 block lookback
+ - subsidy decreases by ~3% every coin fortnight
+ - ~8.4 million total coins
+ - 25 coins per block
+ - 12 block retarget using BRNDF with a 180 block lookback
 
 For more information, as well as an immediately useable, binary version of
 the Monocle client sofware, see http://www.monocle.org.
