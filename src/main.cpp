@@ -1106,8 +1106,11 @@ unsigned char GetNfactor(int64 nTimestamp) {
 
 int64 static GetBlockValue(int nHeight, int64 nFees)
 {
-    int64 nSubsidy = 25 * pow(double(0.97044562), nHeight/10800) * COIN;
-    
+    int64 nSubsidy = 0;
+    if (nHeight < 1000) // reward ramp-up during initial phase
+        nSubsidy = (1 * COIN) << (nHeight + 1)/250;
+    else if (nHeight < 917437) // after this block only fees will be rewarded
+        nSubsidy = 25 * pow(double(0.97044562), nHeight/10800) * COIN;
     return nSubsidy + nFees;
 }
 
