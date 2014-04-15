@@ -1108,10 +1108,10 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
 {
     int64 nSubsidy = 0;
     
-    if (nHeight < 999) // reward ramp-up during initial phase
+    if (nHeight < 999) // reward ramp-up during initial phase (6199 total MON)
         nSubsidy = (1 * COIN) << (nHeight + 1)/200;
-    else if (nHeight < 917437) // after this block only fees will be rewarded
-        nSubsidy = 25 * pow(double(0.97044562), nHeight/10800) * COIN;
+    else if (nHeight < 1468416) // after block 1,468,415 only fees will be rewarded
+        nSubsidy = 25 * pow(double(0.97044562), (nHeight + 1)/10080) * COIN; // (8,393,800.92291282 total MON from block 999 to block 1,468,415)
     
 	return nSubsidy + nFees;
 }
@@ -1260,11 +1260,13 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
             return bnProofOfWorkLimit.GetCompact();
         }
     }
+    
     // difficulty 1.0 until first BRNDF retarget
     if (pindexLast->nHeight+1 < 192 && !fTestNet) {
         return 0x1d00ffff;
     }
-   	if ((pindexLast->nHeight+1) % nInterval != 0) 
+    
+   	if ((pindexLast->nHeight+1) % nInterval != 0) // Retarget every nInterval blocks 
     {
         return pindexLast->nBits;
     }
