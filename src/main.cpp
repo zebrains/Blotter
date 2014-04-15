@@ -1107,11 +1107,13 @@ unsigned char GetNfactor(int64 nTimestamp) {
 int64 static GetBlockValue(int nHeight, int64 nFees)
 {
     int64 nSubsidy = 0;
-    if (nHeight < 1000) // reward ramp-up during initial phase
-        nSubsidy = (1 * COIN) << (nHeight + 1)/250;
+    
+    if (nHeight < 999) // reward ramp-up during initial phase
+        nSubsidy = (1 * COIN) << (nHeight + 1)/200;
     else if (nHeight < 917437) // after this block only fees will be rewarded
         nSubsidy = 25 * pow(double(0.97044562), nHeight/10800) * COIN;
-    return nSubsidy + nFees;
+    
+	return nSubsidy + nFees;
 }
 
 static const int64 nTargetTimespan = 24 * 60; // 24 minutes between retargets
@@ -1173,7 +1175,7 @@ unsigned int static BorisRidiculouslyNamedDifficultyFunction(const CBlockIndex* 
         
 
     for (unsigned int i = 1; BlockReading && BlockReading->nHeight > 0; i++) 
-    		{
+    	{
              	
     	        if (PastBlocksMax > 0 && i > PastBlocksMax) { break; }
                 nPastBlocks++;
@@ -1202,14 +1204,26 @@ unsigned int static BorisRidiculouslyNamedDifficultyFunction(const CBlockIndex* 
             
             if (BlockReading->pprev == NULL) { assert(BlockReading); break; }
             BlockReading = BlockReading->pprev;
-    }
+       }
         
     
     
     CBigNum bnNew(bnPastDifficultyAverage);
-    if (nActualSeconds != 0 && nTargetSeconds != 0) {
-    	if ( nActualSeconds > 4 * nTargetSeconds ) { nActualSeconds = 4 * nTargetSeconds; } // Maximal difficulty increase of 4x    
-        if ( nActualSeconds < nTargetSeconds / 4 ) { nActualSeconds = nTargetSeconds / 4; } // Maximal difficulty decrease of 4x
+    
+    if (nActualSeconds != 0 && nTargetSeconds != 0) 
+    {
+    	
+    	if ( nActualSeconds > nTargetSeconds ) { nActualSeconds *= 2; } 
+    	
+    	if ( nActualSeconds < nTargetSeconds ) 
+    		{ 
+    			nActualSeconds /= 2;
+    			if ( nActualSeconds < 1 ) { nActualSeconds = 1; }
+    		}
+    	
+    	if ( nActualSeconds > 4 * nTargetSeconds ) { nActualSeconds = 4 * nTargetSeconds; } // Maximal difficulty increase of 4x     	
+    	if ( nActualSeconds < nTargetSeconds / 4 ) { nActualSeconds = nTargetSeconds / 4; } // Maximal difficulty decrease of 4x
+        
     	bnNew *= nActualSeconds;
         bnNew /= nTargetSeconds;
     }
