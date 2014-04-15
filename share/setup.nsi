@@ -5,7 +5,7 @@ SetCompressor /SOLID lzma
 
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 0.8.6.2
+!define VERSION 0.8.6.1
 !define COMPANY "Monocle project"
 !define URL http://www.monocle.org/
 
@@ -45,13 +45,13 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-OutFile monocle-0.8.6.2-win32-setup.exe
+OutFile monocle-0.8.6.1-win32-setup.exe
 InstallDir $PROGRAMFILES\Monocle
 CRCCheck on
 XPStyle on
 BrandingText " "
 ShowInstDetails show
-VIProductVersion 0.8.6.2
+VIProductVersion 0.8.6.1
 VIAddVersionKey ProductName Monocle
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
