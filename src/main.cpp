@@ -1237,17 +1237,19 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
         uint32_t                                PastBlocksMin                                = PastSecondsMin / BlocksTargetSpacing; // 180 blocks
         uint32_t                                PastBlocksMax                                = PastSecondsMax / BlocksTargetSpacing; // 5040 blocks       
         
-         if (fTestNet)
+    if (fTestNet)
+    {
+    // If the new block's timestamp is more than nTargetSpacing*16
+    // then allow mining of a min-difficulty block.
+        if (pblock->nTime > pindexLast->nTime + nTargetSpacing*16)
         {
-            // If the new block's timestamp is more than nTargetSpacing*16
-            // then allow mining of a min-difficulty block.
-            if (pblock->nTime > pindexLast->nTime + nTargetSpacing*16)
-            {
-                return bnProofOfWorkLimit.GetCompact();
-            }
+            return bnProofOfWorkLimit.GetCompact();
         }
-        
-
+    }
+    // difficulty 1.0 until first BRNDF retarget
+    if (pindexLast->nHeight+1 < 192) {
+        return 0x1d00ffff;
+    }
    	if ((pindexLast->nHeight+1) % nInterval != 0) 
     {
         return pindexLast->nBits;
