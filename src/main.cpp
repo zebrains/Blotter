@@ -1192,7 +1192,7 @@ unsigned int static BorisRidiculouslyNamedDifficultyFunction(const CBlockIndex* 
                 
                 if (nActualSeconds != 0 && nTargetSeconds != 0) 
                 {
-                	nBlockTimeRatio= nTargetSeconds / nActualSeconds;
+                	nBlockTimeRatio= double(nTargetSeconds) / nActualSeconds;
                 }
             
             
