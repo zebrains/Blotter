@@ -1233,7 +1233,7 @@ unsigned int static BorisRidiculouslyNamedDifficultyFunction(const CBlockIndex* 
     
       
     // debug print
-    printf("Difficulty Retarget - Kimoto's Gravity Hell\n");
+    printf("Difficulty Retarget - Boris's Ridiculously Named Difficulty Function\n");
     printf("nBlockTimeRatio = %g\n", nBlockTimeRatio.to_float());
     printf("Before: %08x %.8f\n", BlockLastSolved->nBits, getDifficulty(BlockLastSolved->nBits));
     printf("After: %08x %.8f\n", bnNew.GetCompact(), getDifficulty(bnNew.GetCompact()));
