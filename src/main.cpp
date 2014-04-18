@@ -1230,11 +1230,11 @@ unsigned int static BorisRidiculouslyNamedDifficultyFunction(const CBlockIndex* 
     printf("Difficulty Retarget - Boris's Ridiculously Named Difficulty Function\n");
     printf("nHeight = %i\n", pindexLast->nHeight);
     printf("nPastBlocks = %u\n", nPastBlocks);
-    printf("nBlockTimeRatio = %g\n", nBlockTimeRatio.to_float());
+    printf("nBlockTimeRatio = %.4f\n", nBlockTimeRatio.to_float());
     printf("SlowBlocksLimit = %.4f\n", SlowBlocksLimit[nPastBlocks-1]);
     printf("FastBlocksLimit = %.4f\n", FastBlocksLimit[nPastBlocks-1]);
-    printf("Before: %08x %.8f\n", BlockLastSolved->nBits, getDifficulty(BlockLastSolved->nBits));
-    printf("After: %08x %.8f\n", bnNew.GetCompact(), getDifficulty(bnNew.GetCompact()));
+    printf("Before: %08x %.8f\n", BlockLastSolved->nBits, GetDifficultyHelper(BlockLastSolved->nBits));
+    printf("After: %08x %.8f\n", bnNew.GetCompact(), GetDifficultyHelper(bnNew.GetCompact()));
     
     return bnNew.GetCompact();
 }

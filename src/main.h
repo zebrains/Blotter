@@ -111,6 +111,8 @@ extern int64 nMinimumInputValue;
 // Minimum disk space required - used in CheckDiskSpace()
 static const uint64 nMinDiskSpace = 52428800;
 
+// BRNDF logging
+double GetDifficultyHelper(unsigned int nBits);
 
 class CReserveKey;
 class CCoinsDB;
