@@ -1228,6 +1228,7 @@ unsigned int static BorisRidiculouslyNamedDifficultyFunction(const CBlockIndex* 
       
     // debug print
     printf("Difficulty Retarget - Boris's Ridiculously Named Difficulty Function\n");
+    printf("nHeight = %i\n", pindexLast->nHeight);
     printf("nPastBlocks = %u\n", nPastBlocks);
     printf("nBlockTimeRatio = %g\n", nBlockTimeRatio.to_float());
     printf("SlowBlocksLimit = %.4f\n", SlowBlocksLimit[nPastBlocks-1]);
