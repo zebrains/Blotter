@@ -40,7 +40,7 @@ double GetDifficulty(const CBlockIndex* blockindex)
     if (blockindex == NULL)
     {
         if (pindexBest == NULL)
-            return 1.0;
+            return 2.0;
         else
             blockindex = pindexBest;
     }
@@ -90,7 +90,7 @@ Object blockToJSON(const CBlock& block, const CBlockIndex* blockindex)
         parent_block.push_back(Pair("merkleroot", block.auxpow->parentBlockHeader.hashMerkleRoot.GetHex()));
         parent_block.push_back(Pair("time", (boost::int64_t)block.auxpow->parentBlockHeader.nTime));
         parent_block.push_back(Pair("bits", HexBits(block.auxpow->parentBlockHeader.nBits)));
-	parent_block.push_back(Pair("difficulty", GetDifficultyHelper(block.auxpow->parentBlockHeader.nBits)));
+        parent_block.push_back(Pair("difficulty", GetDifficultyHelper(block.auxpow->parentBlockHeader.nBits)));
         parent_block.push_back(Pair("nonce", (boost::uint64_t)block.auxpow->parentBlockHeader.nNonce));
         auxpow.push_back(Pair("parent_block", Value(parent_block)));
         result.push_back(Pair("auxpow", Value(auxpow)));
