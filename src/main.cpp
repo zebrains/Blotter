@@ -1145,14 +1145,6 @@ unsigned int ComputeMinWork(unsigned int nBase, int64 nTime)
     return bnResult.GetCompact();
 }
 
-double getDifficulty(unsigned int nBits)
-{
-    CBigNum bnNew, bnDenom;
-    bnNew.SetCompact(nBits);
-    bnDenom = (bnProofOfWorkLimit * COIN)/bnNew;
-    return static_cast<double>(bnDenom.getulong())/COIN;
-}
-
 
 unsigned int static BorisRidiculouslyNamedDifficultyFunction(const CBlockIndex* pindexLast, uint32_t TargetBlocksSpacingSeconds, uint32_t PastBlocksMin, uint32_t PastBlocksMax) {
  
