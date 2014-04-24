@@ -23,7 +23,7 @@ using namespace boost;
 using namespace numeric;
 
 #if defined(NDEBUG)
-# error "Litecoin cannot be compiled without assertions."
+# error "Monocle cannot be compiled without assertions."
 #endif
 
 //
