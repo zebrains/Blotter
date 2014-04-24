@@ -32,4 +32,4 @@ qrc_*.cpp
 build
 Monocle-Qt.xcodeproj
 
-!src/leveldb-*/Makefile
+!src/leveldb*/Makefile

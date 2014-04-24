@@ -65,7 +65,6 @@ namespace Checkpoints
 
     bool CheckBlock(int nHeight, const uint256& hash)
     {
-        if (fTestNet) return true; // Testnet has no checkpoints
         if (!GetBoolArg("-checkpoints", true))
             return true;
 
@@ -109,7 +108,6 @@ namespace Checkpoints
 
     int GetTotalBlocksEstimate()
     {
-        if (fTestNet) return 0; // Testnet has no checkpoints
         if (!GetBoolArg("-checkpoints", true))
             return 0;
 
@@ -120,7 +118,6 @@ namespace Checkpoints
 
     CBlockIndex* GetLastCheckpoint(const std::map<uint256, CBlockIndex*>& mapBlockIndex)
     {
-        if (fTestNet) return NULL; // Testnet has no checkpoints
         if (!GetBoolArg("-checkpoints", true))
             return NULL;
 
