@@ -660,7 +660,7 @@ Value getworkaux(const Array& params, bool fHelp)
         pblock->nTime = max(pindexPrev->GetMedianTimePast()+1, GetAdjustedTime());
         pblock->nNonce = 0;
 
-        // Update nExtraNonce
+        // Update nExtraNonce, create coinbase and calculate the merkleroot
         static unsigned int nExtraNonce = 0;
         IncrementExtraNonceWithAux(pblock, pindexPrev, nExtraNonce, vchAux);
 
@@ -788,7 +788,7 @@ Value getauxblock(const Array& params, bool fHelp)
         static unsigned int nTransactionsUpdatedLast;
         static CBlockIndex* pindexPrev;
         static int64 nStart;
-	static CBlock* pblock;
+        static CBlock* pblock;
         static CBlockTemplate* pblocktemplate;
         if (pindexPrev != pindexBest ||
             (nTransactionsUpdated != nTransactionsUpdatedLast && GetTime() - nStart > 60))
@@ -810,7 +810,7 @@ Value getauxblock(const Array& params, bool fHelp)
             if (!pblocktemplate)
                 throw JSONRPCError(-7, "Out of memory");
 
-	    pblock = &pblocktemplate->block;
+            pblock = &pblocktemplate->block;
             // Update nTime
             pblock->nTime = max(pindexPrev->GetMedianTimePast()+1, GetAdjustedTime());
             pblock->nNonce = 0;
