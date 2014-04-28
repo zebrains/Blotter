@@ -21,7 +21,7 @@ BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
             VALUE "CompanyName",        "Monocle"
-            VALUE "FileDescription",    "UnitesScryptCoin-Qt (OSS GUI client for Monocle)"
+            VALUE "FileDescription",    "Monocle-Qt (OSS GUI client for Monocle)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
             VALUE "InternalName",       "monocle-qt"
             VALUE "LegalCopyright",     COPYRIGHT_STR
