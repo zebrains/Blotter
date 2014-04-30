@@ -50,7 +50,7 @@ namespace detail {
 		typedef void      value_type;
 	};
 
-#if defined(__GNUC__) && defined(__x86_64__)
+#if defined(__GNUC__) && defined(__x86_64__) && !defined(__APPLE__)
 	template <>
 	struct type_from_size<128> {
 		static const bool           is_specialized = true;
