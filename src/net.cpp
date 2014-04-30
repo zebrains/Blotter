@@ -1193,7 +1193,7 @@ void MapPort(bool)
 // The second name should resolve to a list of seed addresses.
 static const char *strMainNetDNSSeed[][2] = {
     {"mon-seed.etyd.org", "mon-seed.etyd.org"},
-    {"mon-seed2.etyd.org", "mon-seed.etyd.org"},
+    {"mon-seed2.etyd.org", "mon-seed2.etyd.org"},
     {"monexplorer.vertcoin.org", "monexplorer.vertcoin.org"},
     {NULL, NULL}
 };
