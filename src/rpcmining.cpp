@@ -587,6 +587,7 @@ Value submitblock(const Array& params, bool fHelp)
 
     return Value::null;
 }
+
 Value getworkaux(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() < 1)

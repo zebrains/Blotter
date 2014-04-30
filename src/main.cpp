@@ -39,7 +39,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0x8ff718ca0b3453b02017853e5030a667d7dae007947d6a2dfa2d18123894c569");
+uint256 hashGenesisBlock("0xf11046292ff76af48b66de6f1a210c09825d2ab4f56975ec507766ebf9c9f443");
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // Monocle: starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -2900,7 +2900,7 @@ bool LoadBlockIndex()
         pchMessageStart[1] = 0xfc;
         pchMessageStart[2] = 0xbe;
         pchMessageStart[3] = 0xea;
-        hashGenesisBlock = uint256("0xb3962932be0f431439fb4c888ad63f4f22d70f85fd0f0621c299b2479899d817");
+        hashGenesisBlock = uint256("0xe900c15110857ca650625825761b00381699ef41451915468b1488644295671a");
     }
 
     //
@@ -2927,30 +2927,45 @@ bool InitBlockIndex() {
     if (!fReindex) {
 
         // Genesis block
-        const char* pszTimestamp = "Times 2014/4/19 Shell stokes tensions over ties with Putin";
+        const char* pszTimestamp = "Times 2014/4/30 Saga staff set for windfall with float";
         CTransaction txNew;
         vector<unsigned char> extraNonce(4);
-        extraNonce[0] = 0xd4;
-        extraNonce[1] = 0x79;
+        unsigned int startBits;
+        
+        if(fTestNet) {
+            extraNonce[0] = 0x08;
+            extraNonce[1] = 0x00;
+            extraNonce[2] = 0x00;
+            extraNonce[3] = 0x00;
+            startBits = 0x1e0ffff0;
+        } else {
+            extraNonce[0] = 0x82;
+            extraNonce[1] = 0x3f;
+            extraNonce[2] = 0x00;
+            extraNonce[3] = 0x00;
+            startBits = 0x1c7fff80;
+        }
+
         txNew.vin.resize(1);
         txNew.vout.resize(1);
-        txNew.vin[0].scriptSig = CScript() << 0x1c7fff80 << CBigNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp)) << extraNonce;
+        txNew.vin[0].scriptSig = CScript() << startBits << CBigNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp)) << extraNonce;
         txNew.vout[0].nValue = 1 * COIN;
+
         txNew.vout[0].scriptPubKey = CScript() << ParseHex("04010eb55121b50ee96dc600452f86f8f34e951846c208f867f806ab8462630a19d1fd2739bff0aa244fad7de984c00dca6cd5723ee5379188eac9e91ab9dc9278") << OP_CHECKSIG;
         CBlock block;
         block.vtx.push_back(txNew);
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 2;
-        block.nTime    = 1397945278;
-        block.nBits    = 0x1c7fff80;
-        block.nNonce   = 1166410240;
+        block.nTime    = 1398858996;
+        block.nBits    = startBits;
+        block.nNonce   = 3832283904;
 
         if (fTestNet)
         {
-            block.nTime    = 1397252451;
-            block.nNonce   = 1196895;
-            block.nBits    = 0x1e0ffff0;
+            block.nTime    = 1398863062;
+            block.nNonce   = 1016070144;
+            block.nBits    = startBits;
         }
 
         //// debug print
@@ -2959,7 +2974,13 @@ bool InitBlockIndex() {
         printf("%s\n", hash.ToString().c_str());
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0xef2db15920d5603af317474e1263674937b2aee4ccb6010a455c937ae489aa1a"));
+        uint256 genMerkleRoot;
+        if(fTestNet)
+            genMerkleRoot.SetHex("0xd147c49fc0fa5fbdf7f76e0e028d3f8159805695c8dddf8f8fdaa225ad815f96");
+        else
+            genMerkleRoot.SetHex("0xe3846300616758149ef8b47b337e025912cad91e6024bed2a3199ed70c7c7374");
+        
+        assert(block.hashMerkleRoot == genMerkleRoot);
         block.print();
         assert(hash == hashGenesisBlock);
 
