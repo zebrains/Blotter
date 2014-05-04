@@ -50,7 +50,8 @@ namespace detail {
 		typedef void      value_type;
 	};
 
-#if defined(__GNUC__) && defined(__x86_64__) && !defined(__APPLE__)
+#if defined(__GNUC__) && defined(__x86_64__) 
+#if defined(__SIZEOF_INT128__) && __SIZEOF_INT128__ == 16
 	template <>
 	struct type_from_size<128> {
 		static const bool           is_specialized = true;
@@ -58,6 +59,7 @@ namespace detail {
 		typedef __int128            value_type;
 		typedef type_from_size<128> next_size;
 	};
+#endif
 #endif
 
 	template <>
