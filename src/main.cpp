@@ -57,10 +57,10 @@ bool fBenchmark = false;
 bool fTxIndex = false;
 unsigned int nCoinCacheSize = 5000;
 
-/** Fees smaller than this (in montoshi) are considered zero fee (for transaction creation) */
-int64 CTransaction::nMinTxFee = 1000000; // 1m montoshis = 0.01 MON
-/** Fees smaller than this (in montoshi) are considered zero fee (for relaying) */
-int64 CTransaction::nMinRelayTxFee = 1000000; // 1m montoshis = 0.01 MON
+/** Fees smaller than this (in braintoshi) are considered zero fee (for transaction creation) */
+int64 CTransaction::nMinTxFee = 1000000; // 1m braintoshis = 0.01 ZBB
+/** Fees smaller than this (in braintoshi) are considered zero fee (for relaying) */
+int64 CTransaction::nMinRelayTxFee = 1000000; // 1m braintoshis = 0.01 ZBB
 
 CMedianFilter<int> cPeerBlockCounts(8, 0); // Amount of blocks that other nodes claim to have
 
@@ -73,7 +73,7 @@ map<uint256, set<uint256> > mapOrphanTransactionsByPrev;
 // Constant stuff for coinbase transactions we create:
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "Monocle Signed Message:\n";
+const string strMessageMagic = "ZeBrains Signed Message:\n";
 
 double dHashesPerSec = 0.0;
 int64 nHPSTimerStart = 0;
@@ -364,7 +364,7 @@ unsigned int LimitOrphanTxSize(unsigned int nMaxOrphans)
 
 bool CTxOut::IsDust() const
 {
-    // Monocle: IsDust() detection disabled, allows any valid dust to be relayed.
+    // ZeBrains: IsDust() detection disabled, allows any valid dust to be relayed.
     // The fees imposed on each dust txo is considered sufficient spam deterrant. 
     return false;
 }
@@ -613,7 +613,7 @@ int64 CTransaction::GetMinFee(unsigned int nBlockSize, bool fAllowFree,
     unsigned int nNewBlockSize = nBlockSize + nBytes;
     int64 nMinFee = (1 + (int64)nBytes / 1000) * nBaseFee;
 
-    // Monocle has no free transactions
+    // ZeBrains has no free transactions
     if (fAllowFree)
     {
         // There is a free transaction area in blocks created by most miners,
@@ -1097,6 +1097,7 @@ uint256 static GetOrphanRoot(const CBlockHeader* pblock)
     return pblock->GetHash();
 }
 
+//TODO: Investigate Nfactor Improvements
 const unsigned char minNfactor = 10;
 const unsigned char maxNfactor = 30;
 
@@ -1126,6 +1127,7 @@ unsigned char GetNfactor(int64 nTimestamp) {
     return min(max(N, minNfactor), maxNfactor);
 }
 
+//TODO: Plan Subsidy Schedule
 int64 static GetBlockValue(int nHeight, int64 nFees)
 {
     int64 nSubsidy = 0;
@@ -1167,7 +1169,7 @@ unsigned int ComputeMinWork(unsigned int nBase, int64 nTime)
     return bnResult.GetCompact();
 }
 
-
+//TODO: Modify difficulty function possibly KGW with fix
 unsigned int static BorisRidiculouslyNamedDifficultyFunction(const CBlockIndex* pindexLast, uint32_t TargetBlocksSpacingSeconds, uint32_t PastBlocksMin, uint32_t PastBlocksMax) {
  
         const CBlockIndex *BlockLastSolved = pindexLast;
